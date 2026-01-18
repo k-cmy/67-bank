@@ -1,13 +1,10 @@
 package com.sixseven.sixsevenBank.auth_users.entity;
 
-import com.sixseven.sixsevenBank.auth_users.repo.UserRepo;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import com.sixseven.sixsevenBank.auth_users.entity.User;
-
 import java.time.LocalDateTime;
 
 @Entity
