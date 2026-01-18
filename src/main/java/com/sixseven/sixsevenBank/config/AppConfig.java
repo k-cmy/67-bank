@@ -12,7 +12,7 @@ import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 
 //contains the setup instructions for the app
 @Configuration
-public class AppConfig {
+public class  AppConfig {
 
     //tells Spring Boot to create an global "Object" (a tool) and keep it in its toolbox
     // Whenever another part of your code needs this tool, Spring will automatically provide it.
