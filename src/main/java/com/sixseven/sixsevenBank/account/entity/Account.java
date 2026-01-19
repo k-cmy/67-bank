@@ -4,6 +4,7 @@ import com.sixseven.sixsevenBank.auth_users.entity.User;
 import com.sixseven.sixsevenBank.enums.AccountStatus;
 import com.sixseven.sixsevenBank.enums.AccountType;
 import com.sixseven.sixsevenBank.enums.Currency;
+import com.sixseven.sixsevenBank.transaction.entity.Transaction;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,7 +19,7 @@ import java.util.List;
 @Entity
 @Data
 @Builder
-@Table(name = "users")
+@Table(name = "accounts")
 @AllArgsConstructor
 @NoArgsConstructor
 public class Account {
