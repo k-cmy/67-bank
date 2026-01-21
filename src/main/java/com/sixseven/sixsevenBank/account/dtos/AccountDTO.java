@@ -8,6 +8,7 @@ import com.sixseven.sixsevenBank.auth_users.dtos.UserDTO;
 import com.sixseven.sixsevenBank.enums.AccountStatus;
 import com.sixseven.sixsevenBank.enums.AccountType;
 import com.sixseven.sixsevenBank.enums.Currency;
+import com.sixseven.sixsevenBank.transaction.dtos.TransactionDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,6 +16,7 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @Builder
