@@ -58,8 +58,6 @@ public class User {
     private LocalDateTime createdAt = LocalDateTime.now();
     private LocalDateTime updateAt; // useful for seeing when a user last changed their password/profile
 
-
-
 }
 // How this works with React & CI/CD
 
