@@ -1,79 +1,75 @@
-# 67-Bank (In Progress)
+# 67-Bank API
 
-A backend-focused digital banking application I’m building to practice production-style Java/Spring development.
+## Overview
 
-> **Project status:** 🚧 In progress (active side project)
+67-Bank is a secure, backend digital banking REST API built with Java and Spring Boot. This project focuses on implementing core banking operations, secure user authentication, and transaction management using modern backend engineering practices.
 
----
-
-## Why I’m Building This
-
-I’m building **67-Bank** to strengthen my skills in:
-- Secure authentication/authorization flows
-- Backend architecture with Spring Boot
-- Database modeling and persistence with JPA/MySQL
-- Real-world integrations (email notifications, JWT, AWS S3)
-
-This project is inspired by the architecture and workflow of the public `phegon-bank` project, while I implement and customize my own version and learning path.
-
----
-
-## Current Progress
-
-### ✅ What is already set up
-- Spring Boot project scaffold and app entry point
-- Core dependencies added for:
-  - Spring Web MVC
-  - Spring Security
-  - Spring Data JPA
-  - Thymeleaf
-  - Validation
-  - Mail
-  - JWT (`jjwt`)
-  - AWS S3 SDK
-  - ModelMapper
-- Base configuration structure for:
-  - Server port
-  - MySQL connection
-  - JWT secret/expiration
-  - Mail SMTP settings
-  - AWS S3 credentials and bucket
-- HTML email template files for onboarding and password flows
-
-### 🧩 Partially implemented / in progress
-- User/auth and notification module wiring
-- Business logic and API endpoint completion
-- End-to-end integration between controllers, services, repositories, and templates
-
-### ⏭️ Next tasks
-- Complete authentication and user account flows
-- Build account/transaction APIs
-- Add role-based access controls and security hardening
-- Improve test coverage (service + controller + integration tests)
-- Add deployment setup and public demo endpoint
+This project is actively being developed as a structured learning progression, inspired by the architecture and workflows of the [Phegon Bank](https://github.com/phegondev/phegon-bank) reference application.
 
 ---
 
 ## Tech Stack
 
-- **Language:** Java 21
-- **Framework:** Spring Boot
-- **Security:** Spring Security + JWT
-- **Database:** MySQL + Spring Data JPA
-- **View/Templates:** Thymeleaf
-- **Email:** Spring Mail
-- **Cloud Storage:** AWS S3 (SDK v2)
-- **Build Tool:** Maven Wrapper
+| Layer | Technology |
+|---|---|
+| **Language** | Java 21 |
+| **Framework** | Spring Boot 3.x (Web MVC, Data JPA, Security, Mail) |
+| **Security** | Spring Security with JWT (JSON Web Tokens) |
+| **Database** | MySQL (Hibernate / Spring Data JPA) |
+| **Templating** | Thymeleaf (for dynamic HTML email templates) |
+| **Build Tool** | Maven Wrapper |
 
 ---
 
-## Local Setup (Current)
+## Current Progress & Implemented Features
 
-> This section reflects the current in-progress setup and may evolve.
+The application is currently in development. The foundational security, user management, and notification systems have been successfully completed.
 
-1. Clone the repository.
-2. Create a `.env` file in the root.
-3. Provide required environment variables (examples):
+### Security & Authentication
+- JWT-based stateless authentication with custom security filters
+- Role-Based Access Control (RBAC) supporting `ADMIN`, `CUSTOMER`, and `AUDITOR` roles
+- Secure user registration, login, and token generation
+- Password reset workflow via secure, time-sensitive email verification codes
+
+### User Management
+- End-to-end user profile creation and management
+- Profile picture upload capabilities
+- Relational entity mapping for users, roles, and accounts
+
+### Notification System
+- Asynchronous email notifications using `JavaMailSender`
+- Customized HTML email templates powered by Thymeleaf (e.g., Welcome Emails, Password Reset Links)
+
+### Robust API Architecture
+- Global centralized exception handling (`@ControllerAdvice`) for consistent API error responses
+- DTO (Data Transfer Object) pattern implementation using ModelMapper to prevent data over-fetching and ensure security
+
+---
+
+## Roadmap & Upcoming Features
+
+Following the reference architecture, the next phases of development will focus on the core banking engine and cloud infrastructure.
+
+- [ ] **Account Management** — Services and controllers for opening, viewing, and closing Savings/Current accounts
+- [ ] **Transaction Engine** — Implementing ACID-compliant logic for deposits, withdrawals, and inter-account transfers with strict balance validation
+- [ ] **Auditor Dashboard** — Specialized endpoints for administrators to view system metrics (total users, accounts, transactions) and trace financial logs
+- [ ] **AWS S3 Integration** — Migrating local file storage (profile pictures) to Amazon S3
+- [ ] **DevOps & Deployment** — Containerizing the application using Docker and setting up GitHub Actions for CI/CD to AWS EC2
+
+---
+
+## Local Setup & Installation
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/yourusername/67-bank.git
+cd 67-bank
+```
+
+### 2. Configure Environment Variables
+
+Create a `.env` file in the root directory and configure your local database, JWT secrets, and SMTP settings:
 
 ```env
 PORT=8080
@@ -81,7 +77,7 @@ LOCAL_DB_URL=jdbc:mysql://localhost:3306/sixseven_bank
 LOCAL_DB_USERNAME=root
 LOCAL_DB_PASSWORD=your_password
 
-JWT_SECRET=your_jwt_secret
+JWT_SECRET=your_super_secret_jwt_key_here
 JWT_EXPIRATION_TIME=3600000
 
 MAIL_USER=your_email@gmail.com
@@ -92,38 +88,18 @@ AWS_SECRETE_KEY=your_secret_key
 AWS_BUCKET_NAME=your_bucket_name
 ```
 
-4. Start the app:
+### 3. Run the Application
+
+Start the application using the Maven wrapper:
 
 ```bash
-bash mvnw spring-boot:run
+./mvnw spring-boot:run
 ```
 
----
-
-## Resume-Friendly Project Summary
-
-If you are a recruiter/developer viewing this repository:
-
-This is an **active in-progress backend banking application** where I am intentionally building features iteratively, with focus on secure backend design, integration patterns, and production-ready engineering practices.
-
-I keep this repository public to demonstrate:
-- how I structure a non-trivial Spring project,
-- how I integrate multiple services (DB, email, JWT, cloud storage),
-- and how I communicate progress transparently while the system is still being developed.
+The API will be available at `http://localhost:8080`.
 
 ---
 
-## Planned Milestones
+## Acknowledgments
 
-- [ ] Milestone 1: Auth + user profile flows complete
-- [ ] Milestone 2: Account and transaction operations complete
-- [ ] Milestone 3: Improved validation, exception handling, and tests
-- [ ] Milestone 4: Deployment + demo + API docs
-
----
-
-## Notes
-
-Because this is still in development, some classes, endpoints, and flows may be incomplete.
-
-That is intentional: this repo is part of my public learning/build journey.
+This project's architecture and learning path are heavily inspired by the [Phegon Bank](https://github.com/phegondev/phegon-bank) repository. Building `67-Bank` serves as a hands-on implementation to deeply understand enterprise Spring Boot development, API security, and system integration.
