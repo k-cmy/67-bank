@@ -1,7 +1,6 @@
 package com.sixseven.sixsevenBank.res;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.sixseven.sixsevenBank.auth_users.dtos.LoginResponse;
 import lombok.Builder;
 import lombok.Data;
 
@@ -16,4 +15,6 @@ public class Response <T> {
     private String message;
 
     private T data;
+
+    private java.util.Map<String , Object> meta;
 }
