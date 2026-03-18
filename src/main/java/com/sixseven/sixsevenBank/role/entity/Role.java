@@ -8,12 +8,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity // ds table
-@Data // auto creates getters and setters
+@Entity // ds table (数据库表)
+@Data // auto creates getters and setters (自动创建getter和setter)
 @Builder // lets u to create a new Role obj very cleanly , e.g. : Role.builder().name("ADMIN").build();
-@Table(name = "roles")  // tells database to name the table roles
-@AllArgsConstructor
-@NoArgsConstructor //create the "Constructors" needed to initialize the object.
+@Table(name = "roles")  // tells database to name the table roles (数据库表名)
+@AllArgsConstructor // no param
+@NoArgsConstructor //create the "Constructors" (构造函数) needed to initialize (初始化) the object. (初始化对象)
 public class Role {
     @Id // create an auto - incrementing ID
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,3 +31,5 @@ public class Role {
 
 //CI/CD : in the pipeline , automated tests will use this file to make sure database logic is working correctly before the code is ever deployed to the real bank server.
 
+
+// Bulider needs AllArgsConstructor to work , since erm Builder always needs to pass fields values at once when .build

@@ -49,7 +49,7 @@ public class UserServiceImpl implements UserService {
 //    private final String uploadDir = "uploads/profile-pictures/";
 
     //this wil save images to the frontend public folder for easy access in the frontend
-    private final String uploadDir = "/Users/mac/phegonDev/phegon-bank-react/public/profile-picture/";
+    private final String uploadDir = "C:/Users/kimbo/Downloads/67-bank/src/main/public/profile-picture/";
 
 
     @Override
@@ -143,17 +143,19 @@ public class UserServiceImpl implements UserService {
             Path uploadPath = Paths.get(uploadDir);
 
             if (!Files.exists(uploadPath)) {
+                // if file does not exist make dir
                 Files.createDirectories(uploadPath);
             }
 
             if (user.getProfilePictureUrl() != null && !user.getProfilePictureUrl().isEmpty()) {
+
                 Path oldFile = Paths.get(user.getProfilePictureUrl());
                 if (Files.exists(oldFile)) {
                     Files.delete(oldFile);
                 }
             }
 
-            // Generate a unique file name to avoid conflicts
+            // generate a unique file name to avoid conflicts
             String originalFileName = file.getOriginalFilename();
             String fileExtension = "";
             if (originalFileName != null && originalFileName.contains(".")) {

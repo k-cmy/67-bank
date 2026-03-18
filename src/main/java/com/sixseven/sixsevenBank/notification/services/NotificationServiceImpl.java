@@ -18,8 +18,8 @@ import org.thymeleaf.context.Context;
 
 import java.nio.charset.StandardCharsets;
 
-@Service
-@Slf4j
+@Service // 
+@Slf4j //
 @RequiredArgsConstructor
 public class NotificationServiceImpl implements NotificationService {
 

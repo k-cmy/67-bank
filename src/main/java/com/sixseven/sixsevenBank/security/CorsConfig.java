@@ -6,12 +6,12 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
-@Configuration
+@Configuration //配置 
 public class CorsConfig {
 
-    @Bean
+    @Bean 
     public CorsFilter corsFilter(){
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource(); 
         CorsConfiguration config = new CorsConfiguration();
 
         config.addAllowedOrigin("*"); //in production we will only allow origins from out trusted frontend
