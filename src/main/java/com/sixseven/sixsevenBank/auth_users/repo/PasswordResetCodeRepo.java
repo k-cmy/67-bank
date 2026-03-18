@@ -1,6 +1,7 @@
 package com.sixseven.sixsevenBank.auth_users.repo;
 
 import com.sixseven.sixsevenBank.auth_users.entity.PasswordResetCode;
+import com.sixseven.sixsevenBank.auth_users.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
@@ -15,6 +16,8 @@ public interface PasswordResetCodeRepo extends JpaRepository<PasswordResetCode, 
    // clean up function :
     // in a bank app : you dont want old , used reset codes sitting in database forever. Once the pwd is successfully changed, you want to wipe that code out for security
     void deleteByCode(String code);
+
+    void deleteByUser(User user);
 }
 
 //        Why this matters for CI/CD

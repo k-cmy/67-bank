@@ -161,7 +161,7 @@ public class AuthServiceImpl implements AuthService {
         public Response<?> forgetPassword(String email) {
 
             User user = userRepo.findByEmail(email).orElseThrow(() -> new NotFoundException("User Not Found"));
-            passwordResetCodeRepo.deleteById(user.getId());
+            passwordResetCodeRepo.deleteByUser(user);
 
             String code = codeGenerator.generateUniqueCode();
 
@@ -178,6 +178,7 @@ public class AuthServiceImpl implements AuthService {
             Map<String, Object> templateVariables = new HashMap<>();
             templateVariables.put("name", user.getFirstName());
             templateVariables.put("resetLink", resetLink + code);
+            templateVariables.put("code", code);
 
 
             NotificationDTO notificationDTO = NotificationDTO.builder()
@@ -193,6 +194,7 @@ public class AuthServiceImpl implements AuthService {
             return Response.builder()
                     .statusCode(HttpStatus.OK.value())
                     .message("Password reset code sent to your email")
+                    .data(code)
                     .build();
 
         }
