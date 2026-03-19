@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-public interface TransactionRepo extends JpaRepository<Transaction, Integer> {
+public interface TransactionRepo extends JpaRepository<Transaction, Long> {
 
     @Query("SELECT t FROM Transaction t WHERE t.account.accountNumber = :accountNumber " +
             "OR (t.transactionType = 'TRANSFER' AND t.destinationAccount = :accountNumber) " +
