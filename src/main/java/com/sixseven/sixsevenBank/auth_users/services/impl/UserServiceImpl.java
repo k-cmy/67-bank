@@ -5,6 +5,7 @@ import com.sixseven.sixsevenBank.auth_users.dtos.UserDTO;
 import com.sixseven.sixsevenBank.auth_users.entity.User;
 import com.sixseven.sixsevenBank.auth_users.repo.UserRepo;
 import com.sixseven.sixsevenBank.auth_users.services.UserService;
+import com.sixseven.sixsevenBank.aws.S3Service;
 import com.sixseven.sixsevenBank.exceptions.BadRequestException;
 import com.sixseven.sixsevenBank.exceptions.NotFoundException;
 import com.sixseven.sixsevenBank.notification.dtos.NotificationDTO;
@@ -42,14 +43,14 @@ public class UserServiceImpl implements UserService {
     private final PasswordEncoder passwordEncoder;
     private final ModelMapper modelMapper;
 
-//    private final S3Service s3Service;
+    private final S3Service s3Service;
 
 
     //this wil save images to the backend root folder
-//    private final String uploadDir = "uploads/profile-pictures/";
+//    private final String uploadDir = "C:/Users/kimbo/Downloads/67-bank/src/main/public/profile-picture/";
 
     //this wil save images to the frontend public folder for easy access in the frontend
-    private final String uploadDir = "C:/Users/kimbo/Downloads/67-bank/src/main/public/profile-picture/";
+    private final String uploadDir = "C:/Users/kimbo/Downloads/67-bank-react/67-bank-react/public/profile-picture/";
 
 
     @Override
@@ -186,38 +187,32 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Response<?> uploadProfilePictureToS3(MultipartFile file) {
-        return null;
+    public Response<?> uploadProfilePictureToS3(MultipartFile file){
+
+        log.info("Inside uploadProfilePictureToS3()");
+        User user = getCurrentLoggedInUser();
+
+        try {
+
+            if(user.getProfilePictureUrl() != null && !user.getProfilePictureUrl().isEmpty()){
+                s3Service.deleteFile(user.getProfilePictureUrl());
+            }
+            String s3Url = s3Service.uploadFile(file, "profile-pictures");
+
+            log.info("profile url is: {}", s3Url );
+
+            user.setProfilePictureUrl(s3Url);
+            userRepo.save(user);
+
+            return Response.builder()
+                    .statusCode(HttpStatus.OK.value())
+                    .message("Profile picture uploaded successfully.")
+                    .data(s3Url)
+                    .build();
+
+        }catch (IOException e){
+
+            throw new RuntimeException(e.getMessage());
+        }
     }
-
-
-//    @Override
-//    public Response<?> uploadProfilePictureToS3(MultipartFile file){
-//
-//        log.info("Inside uploadProfilePictureToS3()");
-//        User user = getCurrentLoggedInUser();
-//
-//        try {
-//
-//            if(user.getProfilePictureUrl() != null && !user.getProfilePictureUrl().isEmpty()){
-//                s3Service.deleteFile(user.getProfilePictureUrl());
-//            }
-//            String s3Url = s3Service.uploadFile(file, "profile-pictures");
-//
-//            log.info("profile url is: {}", s3Url );
-//
-//            user.setProfilePictureUrl(s3Url);
-//            userRepo.save(user);
-//
-//            return Response.builder()
-//                    .statusCode(HttpStatus.OK.value())
-//                    .message("Profile picture uploaded successfully.")
-//                    .data(s3Url)
-//                    .build();
-//
-//        }catch (IOException e){
-//
-//            throw new RuntimeException(e.getMessage());
-//        }
-//    }
 }
