@@ -9,16 +9,15 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Deploy to Ec2
-        uses: appleboy/ssh-action@main
+      - name: Deploy to EC2
+        uses: appleboy/ssh-action@v1.2.0
         with:
-          host: ${{secrets.SSH_HOST}}
+          host: ${{ secrets.SSH_HOST }}
           username: ec2-user
-          key: ${{secrets.SSH_PRIVATE_KEY}}
-          script: | 
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
             cd /home/ec2-user/projects/67-bank
             git pull
-            docker-compose up --build -d
+            docker build -t 67-bank-app .
+            docker rm -f 67-bank || true
+            docker run -d --name 67-bank --restart unless-stopped -p 8090:8090 --env-file .env 67-bank-app
