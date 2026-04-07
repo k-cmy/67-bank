@@ -67,10 +67,12 @@ public class TransactionServiceImpl implements TransactionService {
         //send notification out
         sendTransactionNotifications(savedTxn);
 
+        TransactionDTO transactionDTO = modelMapper.map(savedTxn, TransactionDTO.class);
 
         return Response.builder()
                 .statusCode(200)
                 .message("Transaction successful")
+                .data(transactionDTO)
                 .build();
 
     }

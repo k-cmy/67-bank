@@ -1,16 +1,8 @@
 package com.sixseven.sixsevenBank;
 
-import com.sixseven.sixsevenBank.auth_users.entity.User;
-import com.sixseven.sixsevenBank.enums.NotificationType;
-import com.sixseven.sixsevenBank.notification.dtos.NotificationDTO;
-import com.sixseven.sixsevenBank.notification.repo.NotificationRepo;
-import com.sixseven.sixsevenBank.notification.services.NotificationService;
-import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.EnableAsync;
 
 @SpringBootApplication
