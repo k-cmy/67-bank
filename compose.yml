@@ -1,0 +1,31 @@
+# Docker Compose lets you define and run your app with a single command:
+#   docker compose up --build
+# Instead of manually typing "docker build" and "docker run" with all the flags.
+
+services:
+
+  # This defines one container called "app" — your Spring Boot backend.
+  # If you later add more services (e.g. Redis, Nginx), they go at this level.
+  app:
+
+    # Tells Compose to build the Docker image using the Dockerfile in the
+    # current directory (.) rather than pulling a pre-built image from a registry.
+    build:
+      context: .
+
+    # Maps port 8090 on your host machine to port 8090 inside the container.
+    # Format is "host_port:container_port". After this, you can access the API
+    # at http://localhost:8090 from your browser or Postman.
+    ports:
+      - "8090:8090"
+
+    # Automatically restart the container if it crashes or if Docker restarts.
+    # "unless-stopped" means it keeps restarting UNLESS you manually stop it
+    # with "docker compose down" or "docker stop".
+    restart: unless-stopped
+
+    # Load all environment variables from your .env file and inject them into
+    # the container. This is how your app receives DB credentials, JWT secret,
+    # mail config, etc. without hardcoding them in the image.
+    env_file:
+      - .env
