@@ -1,0 +1,14 @@
+.git
+.gitignore
+.env
+.env.properties
+.idea
+.vscode
+*.iml
+*.iws
+*.ipr
+target/
+public/
+*.md
+LICENSE
+.mvn/wrapper/maven-wrapper.jar
