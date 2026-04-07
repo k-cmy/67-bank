@@ -3,9 +3,7 @@ package com.sixseven.sixsevenBank.transaction.entity;
 import com.sixseven.sixsevenBank.account.entity.Account;
 import com.sixseven.sixsevenBank.enums.TransactionStatus;
 import com.sixseven.sixsevenBank.enums.TransactionType;
-import jakarta.persistence.Entity;
 import jakarta.persistence.*;
-import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,7 +11,6 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Entity
 @Data
